@@ -1,0 +1,151 @@
+{% extends 'core/base.html' %}
+{% block title %} Crop Image {% endblock %}
+{% block content %}
+
+<div class="container-fluid  p-5">
+    <div class="row g-3">
+        <div class="col-md-6 offset-md-3">
+            <div class="card border-0 shadow-md ">
+                <div class="card-header bg-secondary text-light">
+                    <h3>Crop Image</h3>
+                </div>
+                <div class="card-body">
+                    <div class="" style="width: 100%;">
+                        <img id="uploaded-image" src=""  style="width: 100%;">
+                    </div>
+                   
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">
+                            Select Image :</label>
+                        <div class="custom-file">
+                            <input class="form-control" type="file" accept="image/*" id="cover_image">
+                        </div>
+                    </div>
+                    <a class="btn btn-secondary btn-block text-uppercase rounded-1" id="downloadButton" href="" download>
+                        Download
+
+                    </a>
+
+                    <!-- Crop Modal -->
+                    <div class="modal" tabindex="-1" role="dialog" id="uploadimageModal">
+                        <div class="modal-dialog" role="document" style="min-width: 700px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Crop Image</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <div id="image_demo"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary crop_image">Crop and Save</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $('#uploaded-image').hide();
+        $('#downloadButton').hide();
+
+        var image_crop = $('#image_demo').croppie({
+            viewport: {
+                width: 600,
+                height: 300,
+                type: 'square'
+            },
+            boundary: {
+                width: 650,
+                height: 350
+            }
+        });
+
+
+        $('#cover_image').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                image_crop.croppie('bind', {
+                    url: event.target.result,
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $('#uploadimageModal').modal('show');
+        });
+
+        $('.crop_image').click(function (event) {
+            var formData = new FormData();
+            image_crop.croppie('result', { type: 'blob', format: 'png' }).then(function (blob) {
+                formData.append('cropped_image', blob);
+                ajaxFormPost(formData, "{% url 'temp1' %}");
+            });
+            $('#uploadimageModal').modal('hide');
+        });
+
+        function ajaxFormPost(formData, actionURL) {
+            $.ajax({
+                url: actionURL,
+                type: 'POST',
+                data: formData,
+                cache: false,
+                async: true,
+                processData: false,
+                contentType: false,
+                timeout: 5000,
+                beforeSend: function () {
+                },
+                success: function (response) {
+                    if (response['status'] === 'success') {
+
+                        swal({
+                            title: 'Success!',
+                            text: response['message'],
+                            type: 'success',
+                            timer: 2000
+                        }).then(function () {
+                            $('#uploaded-image').show();
+                            $('#cover_image').val("");
+                            $('#uploaded-image').attr('src', response['url']);
+                            $('#downloadButton').show();
+                            $('#downloadButton').attr('href', response['url']);
+
+                        }, function () {
+                        });
+                    } else {
+                        swal({
+                            title: 'Failed!',
+                            text: response['message'],
+                            type: 'error'
+                        });
+                    }
+                },
+                complete: function () {
+                }
+            });
+        }
+
+    });
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Photo Canvas - Home Page {% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Nav tabs -->
+
+
+<!-- Tab panes -->
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="tab1Id" role="tabpanel"></div>
+  <div class="tab-pane fade" id="tab2Id" role="tabpanel"></div>
+  <div class="tab-pane fade" id="tab3Id" role="tabpanel"></div>
+  <div class="tab-pane fade" id="tab4Id" role="tabpanel"></div>
+  <div class="tab-pane fade" id="tab5Id" role="tabpanel"></div>
+</div>
+
+<!-- (Optional) - Place this js code after initializing bootstrap.min.js or bootstrap.bundle.min.js -->
+<script>
+  var triggerEl = document.querySelector('#navId a')
+  bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
+</script>
+
+
+
+<div class="container my-5">
+    <div class="row my-5">
+        <h1 class="text-center ">Welcome to Photo Canvas</h1>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Crop Image</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Image Enhancer</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">BG Remover</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">pdf to jpg</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">jpg to pdf</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Doc</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Document</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3 a">
+        <div class="card bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Logo</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.ulk of the card's content.</p>
+              <a href="{% url 'crop_image' %}" class="btn btn-outline-info rounded-1"> Crop Image </a>
+            </div>
+          </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        //pass
+    });
+</script>
+{% endblock %}
