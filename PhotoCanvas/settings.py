@@ -89,6 +89,11 @@ WSGI_APPLICATION = 'PhotoCanvas.wsgi.application'
 #     }
 # }
 
+import environ
+env = environ.Env() # set default values and casting
+environ.Env.read_env()
+
+
 import dj_database_url
 # # import env
 DATABASES={
